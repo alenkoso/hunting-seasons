@@ -1,47 +1,50 @@
 <script lang="ts">
-  import svelteLogo from './assets/svelte.svg'
-  import viteLogo from '/vite.svg'
-  import Counter from './lib/Counter.svelte'
+import { onMount } from 'svelte';
+import { format } from 'date-fns';
+import { getActiveSeasons, type Species } from './lib/huntingSeasons';
+
+let selectedDate = new Date();
+let activeSeasons: Species[] = [];
+
+function updateActiveSeasons() {
+  activeSeasons = getActiveSeasons(selectedDate);
+}
+
+onMount(() => {
+  updateActiveSeasons();
+});
 </script>
 
-<main>
-  <div>
-    <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
+<main class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold mb-4">Hunting Seasons Checker</h1>
+  
+  <div class="mb-4">
+    <label for="date-picker" class="block text-sm font-medium text-gray-700">Select Date</label>
+    <input
+      id="date-picker"
+      type="date"
+      bind:value={selectedDate}
+      on:change={updateActiveSeasons}
+      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+    />
   </div>
-  <h1>Vite + Svelte</h1>
 
-  <div class="card">
-    <Counter />
-  </div>
+  <h2 class="text-xl font-semibold mb-2">Active Hunting Seasons for {format(selectedDate, 'MMMM d, yyyy')}</h2>
 
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
-
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
+  {#if activeSeasons.length === 0}
+    <p>No active hunting seasons for this date.</p>
+  {:else}
+    <ul class="space-y-4">
+      {#each activeSeasons as species}
+        <li class="bg-white shadow rounded-lg p-4">
+          <h3 class="text-lg font-medium">{species.name}</h3>
+          <ul class="mt-2 space-y-1">
+            {#each species.seasons as season}
+              <li class="text-sm text-gray-600">{season.type}</li>
+            {/each}
+          </ul>
+        </li>
+      {/each}
+    </ul>
+  {/if}
 </main>
-
-<style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
-</style>
