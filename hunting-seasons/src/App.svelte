@@ -16,7 +16,7 @@ onMount(() => {
 </script>
 
 <main class="container mx-auto px-4 py-8">
-  <h1 class="text-3xl font-bold mb-4">Hunting Seasons Checker</h1>
+  <h1 class="text-3xl font-bold mb-4">Active Hunting Seasons</h1>
   
   <div class="mb-4">
     <label for="date-picker" class="block text-sm font-medium text-gray-700">Select Date</label>

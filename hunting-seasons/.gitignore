@@ -19,20 +19,17 @@ dist-ssr
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
 
-# TypeScript
-*.tsbuildinfo
+# OS files
+.DS_Store
+Thumbs.db
 
-# Vite
-vite.config.ts.timestamp-*
-
-# Environment variables
+# Environment files
 .env
 .env.*
 !.env.example
@@ -40,16 +37,19 @@ vite.config.ts.timestamp-*
 # Svelte
 .svelte-kit
 
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# Vite
+vite.config.ts.timestamp-*
+
+# TypeScript
+*.tsbuildinfo
+
+# Testing
+coverage
 
 # Temporary files
 *.tmp
 *.bak
 *.swp
+
+# Other
+*.local
