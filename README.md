@@ -4,6 +4,8 @@
 
 Hunting Seasons Checker is a web application designed to help hunters in Slovenia quickly check which species can be hunted on any given day. The app provides an easy-to-use interface with a date picker, allowing users to select any date and view the active hunting seasons for that day.
 
+[... rest of the README content ...]
+
 ## Features
 
 - Mobile-friendly design for easy access on smartphones
